@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "angular-exam-md4"
+    }
+  },
+  "defaultProject": "angular-exam-md4",
+  "cli": {
+    "analytics": "c9171844-d2b1-48f9-92eb-8bd1ecfcd509"
+  }
 }
