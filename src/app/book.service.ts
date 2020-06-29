@@ -30,7 +30,7 @@ export class BookService {
     return this.httpClient.post<IBook>(this.API, book);
   }
 
-  update(book: IBook): Observable<IBook>{
-    return this.httpClient.put<IBook>(`${this.API}/${book.id}`, book);
+  update(book: IBook, id: number): Observable<IBook>{
+    return this.httpClient.put<IBook>(`${this.API}/${id}`, book);
   }
 }

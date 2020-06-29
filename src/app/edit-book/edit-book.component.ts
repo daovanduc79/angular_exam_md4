@@ -13,6 +13,7 @@ export class EditBookComponent implements OnInit {
 
   public bookForm: FormGroup;
   public book: IBook;
+  private id: number
 
   constructor(
     private route: ActivatedRoute,
@@ -23,30 +24,32 @@ export class EditBookComponent implements OnInit {
 
   ngOnInit() {
     
-    const id = +this.route.snapshot.paramMap.get('id');
+    this.id = +this.route.snapshot.paramMap.get('id');
     
     this.bookForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(10)]],
-      author: ['Nam Cao', [Validators.required]],
+      author: ['', [Validators.required]],
       description: ['', [Validators.required, Validators.minLength(10)]],
     })
 
-    this.bookService.getBookById(id).subscribe(next => {
+    this.bookService.getBookById(this.id).subscribe(next => {
       this.book = next;
       this.bookForm.patchValue(this.book);
     }, error => {console.log(error)});
   }
 
   onSubmit(){
-    if(this.bookForm.valid){
-      const { value } = this.bookForm.value;
+    // if(this.bookForm.valid){
+      const book = this.bookForm.value;
+      console.log(this.bookForm);
+      console.log(this.id);
 
-      this.bookService.update(value).subscribe(next => {
+      this.bookService.update(book, this.id).subscribe(next => {
         console.log(next);
         alert('cap nhat thanh cong');
         this.router.navigate(['']);
       }, error => {console.log(error)}); 
-    }
+    
   }
 
 }
